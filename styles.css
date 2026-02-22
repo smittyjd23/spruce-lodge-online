@@ -441,3 +441,86 @@ nav a[aria-current="page"] {
     border-radius: var(--radius) var(--radius) 0 0;
   }
 }
+
+
+/* ============================================================
+   Install-to-home-screen banner
+   ============================================================ */
+.install-banner {
+  position: fixed;
+  bottom: var(--nav-height);
+  left: 0;
+  right: 0;
+  z-index: 48;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-fg);
+  color: var(--color-primary-fg);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.install-banner[hidden] { display: none; }
+
+.install-banner-icon {
+  display: flex;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.install-banner-msg {
+  flex: 1;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.install-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.install-accept-btn {
+  padding: 0.375rem 0.875rem;
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.install-accept-btn:active {
+  opacity: 0.85;
+}
+
+.install-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius);
+}
+
+.install-close-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (min-width: 32rem) {
+  .install-banner {
+    left: 50%;
+    right: auto;
+    width: 32rem;
+    transform: translateX(-50%);
+    border-inline: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
