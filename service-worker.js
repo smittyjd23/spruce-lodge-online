@@ -1,18 +1,8 @@
-const CACHE_NAME = 'spruce-lodge-v3';
+const CACHE_NAME = 'spruce-lodge-v4';
 
-const CACHED_URLS = [
-  './',
-  './index.html',
-  './info.html',
-  './food.html',
-  './activities.html',
-  './contact.html',
-  './styles.css',
-  './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './assets/hero-cabin.jpg',
-];
+// Caching paused during content development.
+// To re-enable, restore the URL list and bump CACHE_NAME.
+const CACHED_URLS = [];
 
 self.addEventListener('install', event => {
   event.waitUntil(
