@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spruce-lodge-v1';
+const CACHE_NAME = 'spruce-lodge-v2';
 
 const CACHED_URLS = [
   './',
