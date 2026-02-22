@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spruce-lodge-v2';
+const CACHE_NAME = 'spruce-lodge-v3';
 
 const CACHED_URLS = [
   './',
@@ -11,6 +11,7 @@ const CACHED_URLS = [
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './assets/hero-cabin.jpg',
 ];
 
 self.addEventListener('install', event => {
