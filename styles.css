@@ -267,6 +267,65 @@ nav a[aria-current="page"] {
 
 
 /* ============================================================
+   Food & Groceries page
+   ============================================================ */
+
+/* Wrapper that spaces the two category sections apart */
+.food-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+/* Strip the broad `section` padding inside this layout */
+.food-sections section {
+  padding: 0;
+}
+
+/* Bare icon + heading row (no bubble — icon sits inline with text) */
+.food-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);   /* colours the SVG stroke */
+}
+
+/* Keep the h2 text dark; cancel margin-bottom from the broad `section h2` rule */
+.food-heading h2 {
+  color: var(--color-fg);
+  margin-bottom: 0;
+}
+
+/* Tighter gap than the broad `section ul` rule (space-y-2 = 0.5rem) */
+.place-list {
+  gap: 0.5rem;
+}
+
+.place-card {
+  padding: 0.875rem;             /* p-3.5 */
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.place-card strong {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.place-card p {
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+
+/* ============================================================
    Page header (inner pages without a hero image)
    ============================================================ */
 .page-header {
