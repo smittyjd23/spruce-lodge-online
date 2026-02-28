@@ -6,16 +6,11 @@
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MDEHVQHX6V"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MDEHVQHX6V');
-  </script>
+  <script src="analytics.js"></script>
   <link rel="canonical" href="https://www.sprucelodgewv.online/rental.html">
   <script>
-    var DEST = 'https://www.mountaintoprentals.net/vacation-rental-home.asp?PageDataID=122483';
-    var redirected = false;
+    const DEST = 'https://www.mountaintoprentals.net/vacation-rental-home.asp?PageDataID=122483';
+    let redirected = false;
 
     function doRedirect() {
       if (!redirected) {
