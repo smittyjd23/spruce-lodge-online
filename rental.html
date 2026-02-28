@@ -2,9 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://www.mountaintoprentals.net/vacation-rental-home.asp?PageDataID=122483">
   <title>Spruce Lodge — Book Your Stay</title>
-  <script>window.location.replace("https://www.mountaintoprentals.net/vacation-rental-home.asp?PageDataID=122483");</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MDEHVQHX6V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MDEHVQHX6V');
+
+    var DEST = 'https://www.mountaintoprentals.net/vacation-rental-home.asp?PageDataID=122483';
+    var redirected = false;
+
+    function doRedirect() {
+      if (!redirected) {
+        redirected = true;
+        window.location.replace(DEST);
+      }
+    }
+
+    // Safety fallback: redirect after 500 ms even if GA hasn't responded
+    setTimeout(doRedirect, 500);
+
+    // Fire event; redirect in the callback so the beacon has time to send
+    gtag('event', 'rental_redirect', {
+      event_callback: doRedirect,
+      event_timeout: 500
+    });
+  </script>
 </head>
 <body>
   <p>Redirecting… <a href="https://www.mountaintoprentals.net/vacation-rental-home.asp?PageDataID=122483">Click here if you are not redirected automatically.</a></p>
