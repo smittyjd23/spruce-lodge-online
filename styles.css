@@ -20,7 +20,7 @@
 
   /* Spacing & shape */
   --radius:      0.5rem;
-  --nav-height:  4rem;
+  --nav-height:  calc(4rem + env(safe-area-inset-bottom, 0px));
 
   /* Hero overlay — darkens bottom of image so text is legible */
   --hero-gradient: linear-gradient(
