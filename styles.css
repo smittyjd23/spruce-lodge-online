@@ -209,16 +209,16 @@ aside {
   border-radius: var(--radius);
 }
 
-/* Homepage: hero page has little content, so use flex to push the
-   welcome aside down to the nav-adjacent position — matching the
-   ~24 px gap that scrolling pages show at their bottom. */
+/* Homepage: the hero expands to fill surplus viewport height, keeping
+   the Quick Access section and welcome aside together just above the nav —
+   matching the ~24px gap that scrolling pages show at their bottom. */
 main:has(.hero) {
   display: flex;
   flex-direction: column;
 }
 
-main:has(.hero) > aside {
-  margin-top: auto;
+main:has(.hero) > .hero {
+  flex-grow: 1;   /* height:18rem acts as minimum; hero grows beyond it */
 }
 
 aside h3 {
