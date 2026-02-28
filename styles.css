@@ -506,6 +506,20 @@ details[open] > .food-heading::after {
 
 
 /* ============================================================
+   iOS standalone PWA — extra buffer below nav icons so the
+   iOS swipe-up gesture zone doesn't conflict with nav taps
+   ============================================================ */
+@media (display-mode: standalone) {
+  :root {
+    --nav-height: calc(4rem + env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+  nav {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+}
+
+
+/* ============================================================
    Install-to-home-screen banner
    ============================================================ */
 .install-banner {
