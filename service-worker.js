@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spruce-lodge-v10';
+const CACHE_NAME = 'spruce-lodge-v11';
 
 const PRECACHE_URLS = [
   './',
@@ -12,6 +12,9 @@ const PRECACHE_URLS = [
   'favicon.svg',
   'manifest.json',
   'service-worker.js',
+  'nav.js',
+  'analytics.js',
+  'install-prompt.js',
   'icons/icon-192.png',
   'icons/icon-512.png',
   'assets/hero-cabin.jpg',
@@ -20,43 +23,65 @@ const PRECACHE_URLS = [
 // --- Install: precache the app shell and assets ---
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE_URLS))
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.addAll(PRECACHE_URLS);
+      await self.skipWaiting();
+    })()
   );
-  self.skipWaiting();
 });
 
 // --- Activate: delete old cache versions ---
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(
         keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
-      )
-    )
+      );
+      await self.clients.claim();
+    })()
   );
-  self.clients.claim();
 });
 
 // --- Stale-While-Revalidate: serve cache instantly, refresh in background ---
-function staleWhileRevalidate(request) {
-  const networkUpdate = fetch(request).then(response => {
+async function staleWhileRevalidate(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await caches.match(request);
+
+  const networkPromise = fetch(request).then(async response => {
     if (response.ok) {
-      caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
+      await cache.put(request, response.clone());
     }
     return response;
+  }).catch(err => {
+    console.warn('[SW] Network update failed for', request.url, err);
+    return null;
   });
-  return caches.match(request).then(cached => {
-    if (cached) {
-      networkUpdate.catch(() => {}); // background update, ignore network errors
-      return cached;
-    }
-    return networkUpdate; // first visit: wait for network
-  });
+
+  if (cached) {
+    // Return the cached response immediately; network update runs in background
+    return cached;
+  }
+
+  // No cached version: wait for network (first visit)
+  const networkResponse = await networkPromise;
+  if (!networkResponse) {
+    throw new Error(`[SW] Network failed and no cache for: ${request.url}`);
+  }
+  return networkResponse;
 }
 
 // --- Cache-First: serve from cache, fall back to network ---
-function cacheFirst(request) {
-  return caches.match(request).then(cached => cached || fetch(request));
+async function cacheFirst(request) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+  try {
+    return await fetch(request);
+  } catch (err) {
+    console.warn('[SW] Cache miss and network failed for', request.url, err);
+    throw err;
+  }
 }
 
 // --- Fetch: HTML navigation uses SWR; everything else is Cache-First ---
